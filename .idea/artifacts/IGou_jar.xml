@@ -1,0 +1,12 @@
+<component name="ArtifactManager">
+  <artifact build-on-make="true" name="IGou:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/IGou_jar</output-path>
+    <root id="root">
+      <element id="archive" name="IGou.jar">
+        <element id="module-output" name="IGou" />
+      </element>
+      <element id="library" level="project" name="lib" />
+      <element id="library" level="project" name="Java EE 6-Java EE 6" />
+    </root>
+  </artifact>
+</component>

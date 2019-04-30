@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping  package="com.igou.pojos">
+	<class name="Brand" table="brand">
+		<!-- 主键 -->
+		<id name="id" column="ID">
+			<generator class="native" />
+		</id>
+		<!-- 品牌名 -->
+		<property name="name" column="NAME" type="string"
+			not-null="true" />
+		<!-- 标题图片 -->
+		<property name="imgUrl" column="ImgUrl" type="string" />
+		<!-- 是否大牌 -->
+		<property name="isbig" column="isBig" type="java.lang.Integer"
+			not-null="true" />
+		<!-- N-1 关系 -->
+		<set name="products"   inverse="true" lazy="false">
+			<key>
+				<column name="brand_id"></column>
+			</key>
+			<one-to-many class="Product" />
+		</set>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.igou.app.pojos">
+	<class name="ProductClassify" table="productclassify">
+		<!-- 主键 -->
+		<id name="id" column="ID">
+			<generator class="native" />
+		</id>
+		<!-- 品牌名 -->
+
+		<property name="title" column="title" type="string" not-null="true" />
+		<property name="textColor" column="textColor" type="string" not-null="true" />
+		
+		<set name="products"  inverse="false" lazy="false">
+			<key>
+				<column name="product_id"></column>
+			</key>
+			<one-to-many class="com.igou.pojos.Product"/>	
+		</set>
+		
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
+	<package name="mine" namespace="/" extends="json-default">
+		<interceptors>
+			<interceptor name="loginInterceptor" class="com.igou.Interrupte.UserInterrupte"/>
+            <interceptor name="noInterceptor" class="com.igou.Interrupte.NoInterceptor"/>
+		</interceptors>
+
+        <action name="/wap/*_*" class="{1}Action" method="{2}">
+            <interceptor-ref name="noInterceptor"/>
+            <result>/BackManager/{1}_{2}.jsp</result>
+
+        </action>
+
+		<action name="*_*" class="{1}Action" method="{2}">
+			<!--<interceptor-ref name="loginInterceptor"/>-->
+			<result>/BackManager/{1}_{2}.jsp</result>
+			<result name="list" type="redirectAction">{1}_list</result>
+			<result name="login">/BackManager/login.jsp</result>
+			<result name="b">/BackManager/success.jsp</result>
+			<result name="index">/BackManager/index.jsp</result>
+			<result name="init">/BackManager/Init.jsp</result>
+		</action>
+		<action name="login" class="UserInfoAction" method="CMSlogin"/>
+
+
+	</package>
+</struts>

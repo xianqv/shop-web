@@ -1,0 +1,196 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans 
+  		http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+  		http://www.springframework.org/schema/aop 
+  		http://www.springframework.org/schema/aop/spring-aop-4.1.xsd
+  		http://www.springframework.org/schema/tx 
+  		http://www.springframework.org/schema/tx/spring-tx-4.1.xsd
+        http://www.springframework.org/schema/task     
+        http://www.springframework.org/schema/task/spring-task-4.1.xsd  
+  		http://www.springframework.org/schema/context
+  		http://www.springframework.org/schema/context/spring-context-4.1.xsd">
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="configLocation" value="classpath:hibernate.cfg.xml"></property>
+	</bean>
+	<!-- 事务切面配置 -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory"  ref="sessionFactory"/>
+	</bean>
+	<!-- 定义事务通知 -->
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<!-- 对查找方法进行只读事务通知要求查找方法以find开头可按需要修改 -->
+			<tx:method name="find*" propagation="SUPPORTS" read-only="true" />
+			<!-- 对其它方法如增 删 改进行事务支持 -->
+			<tx:method name="*" propagation="REQUIRED" />
+		</tx:attributes>
+	</tx:advice>
+	<!-- 切面定义 -->
+	<aop:config>
+		<!-- 对com..service包及子包中的任意方法进行切面 -->
+		<aop:pointcut id="bizMethods" expression="execution(* com..service.*.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="bizMethods" />
+	</aop:config>
+	<!-- dao层的配置 -->
+	
+	<bean id="cartDao" class="com.igou.dao.CartDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	
+	<bean id="addressDao" class="com.igou.dao.AddressDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<bean id="userInfoDao" class="com.igou.dao.UserInfoDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<bean id="productDao" class="com.igou.dao.ProductDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<bean id="productTypeDao" class="com.igou.dao.ProductTypeDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<bean id="brandDao" class="com.igou.dao.BrandDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<bean id="sizeDao" class="com.igou.dao.SizeDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	
+	
+	<bean id="functionButtonDao" class="com.igou.dao.FunctionButtonDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<bean id="productClassifyDao" class="com.igou.dao.ProductClassifyDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<bean id="advertDao" class="com.igou.dao.AdvertDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	<bean id="orderDao" class="com.igou.dao.OrderDao">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<!-- Service层的配置 -->
+	<bean id="orderService" class="com.igou.service.OrderService">
+		<property name="orderDao" ref="orderDao"/>
+	</bean>
+
+	<bean id="cartService" class="com.igou.service.CartService">
+		<property name="cartDao" ref="cartDao"/>
+	</bean>
+
+	<bean id="addressService" class="com.igou.service.AddressService">
+		<property name="addressDao" ref="addressDao"/>
+	</bean>
+	
+	<bean id="userInfoService" class="com.igou.service.UserInfoService">
+		<property name="userInfoDao" ref="userInfoDao"/>
+	</bean>
+	
+	<bean id="productService" class="com.igou.service.ProductService">
+		<property name="productDao" ref="productDao"/>
+	</bean>
+	
+	
+	<bean id="productTypeService" class="com.igou.service.ProductTypeService">
+		<property name="productTypeDao" ref="productTypeDao"/>
+	</bean>
+	
+	<bean id="brandService" class="com.igou.service.BrandService">
+		<property name="brandDao" ref="brandDao"/>
+	</bean>
+	
+	<bean id="sizeService" class="com.igou.service.SizeService">
+		<property name="sizeDao" ref="sizeDao"/>
+	</bean>
+	
+	
+	
+	<bean id="functionButtonService" class="com.igou.service.FunctionButtonService">
+		<property name="functionButtonDao" ref="functionButtonDao"/>
+	</bean>
+	
+	<bean id="productClassifyService" class="com.igou.service.ProductClassifyService">
+		<property name="productClassifyDao" ref="productClassifyDao"/>
+	</bean>
+	
+	
+		<bean id="advertService" class="com.igou.service.AdvertService">
+		<property name="advertDao" ref="advertDao"/>
+	</bean>
+	
+	<!-- Action层的配置 -->
+	<bean id="OrderAction" class="com.igou.action.OrderAction" scope="prototype">
+		<property name="orderService" ref="orderService"/>
+		<property name="productService" ref="productService"/>
+	</bean>
+	
+	<bean id="ProductAction" class="com.igou.action.ProductAction" scope="prototype">
+		<property name="productService" ref="productService"/>
+	</bean>
+	
+	<bean id="ProductTypeAction" class="com.igou.action.ProductTypeAction" scope="prototype">
+		<property name="productTypeService" ref="productTypeService"/>
+		<property name="productService" ref="productService"/>
+	</bean>
+	
+	<bean id="BrandAction" class="com.igou.action.BrandAction" scope="prototype">
+		<property name="brandService" ref="brandService"/>
+	</bean>
+	
+	<bean id="SizeAction" class="com.igou.action.SizeAction" scope="prototype">
+		<property name="sizeService" ref="sizeService"/>
+		<property name="productService" ref="productService"/>
+	</bean>
+	
+	
+	
+	<bean id="FunctionButtonAction" class="com.igou.action.FunctionButtonAction" scope="prototype">
+		<property name="functionButtonService" ref="functionButtonService"/>
+	</bean>
+	
+	<bean id="ProductClassifyAction" class="com.igou.action.ProductClassifyAction" scope="prototype">
+		<property name="productClassifyService" ref="productClassifyService"/>
+		<property name="productService" ref="productService"/>
+	</bean>
+	
+	<bean id="AdvertAction" class="com.igou.action.AdvertAction" scope="prototype">
+		<property name="advertService" ref="advertService"/>
+	</bean>
+	
+	<bean id="UserInfoAction" class="com.igou.action.UserInfoAction" scope="prototype">
+		<property name="userInfoService" ref="userInfoService"/>
+	</bean>
+	
+	
+	<bean id="AddressAction" class="com.igou.action.AddressAction" scope="prototype">
+		<property name="addressService" ref="addressService"/>
+		<property name="userInfoService" ref="userInfoService"/>
+	</bean>
+	
+	<bean id="CartAction" class="com.igou.action.CartAction" scope="prototype">
+		<property name="cartService" ref="cartService"/>
+		<property name="productService" ref="productService"/>
+		<property name="userInfoService" ref="userInfoService"/>
+		
+	</bean>
+	
+</beans>

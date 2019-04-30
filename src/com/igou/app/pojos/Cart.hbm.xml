@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.igou.app.pojos">
+	<class name="Cart" table="cart">
+		<!-- 主键 -->
+		<id name="id" column="ID">
+			<generator class="native" />
+		</id>
+		<property name="size" column="size" type="string" not-null="true" />
+		<property name="color" column="color" type="string" not-null="true" />
+		<property name="num" column="num" type="int" not-null="true" />
+		<property name="totalPrice" column="totalPrice" type="double" not-null="true" />
+		<property name="userId" column="userId" type="int" not-null="true" />
+		<property name="proId" column="proId" type="int" not-null="true"/>
+		<property name="userinfo_id" column="userinfo_id" type="int" not-null="true"/>
+		
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.igou.pojos">
+	<class name="Color" table="color">
+		<!-- 主键 -->
+		<id name="id" column="ID">
+			<generator class="native" />
+		</id>
+		<!-- 颜色名 -->
+		<property name="name" column="NAME" type="string"
+			not-null="true" />
+
+		<!-- 选中状态 -->
+		<property name="state" column="state" type="java.lang.Integer"
+			not-null="true" />
+			
+		<!-- 相应颜色商品数量 -->
+		<property name="num" column="num" type="java.lang.Integer"
+			not-null="true" />
+		<!-- 尺寸与颜色是一对多关系 N-1 -->
+		<many-to-one name="size" column="size_id" class="Size"  lazy="false"></many-to-one>
+	</class>
+</hibernate-mapping>

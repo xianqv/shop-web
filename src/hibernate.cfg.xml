@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+
+	<session-factory>
+		<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="connection.url">jdbc:mysql://localhost:3306/igou?useUnicod=true&amp;characterEncoding=utf-8</property>
+		<property name="connection.username">root</property>
+		<property name="connection.password">root</property>
+		<property name="dialect">org.hibernate.dialect.MySQL5Dialect</property>
+		<property name="show_sql">true</property>
+		<property name="connection.provider_class">org.hibernate.connection.C3P0ConnectionProvider</property>
+		<property name="hbm2ddl.auto">update</property>
+
+
+		<!-- <mapping resource="com/qrsx/pojos/Sclass.hbm.xml" /> -->
+		<mapping resource="com/igou/pojos/Product.hbm.xml" />
+		<mapping resource="com/igou/pojos/Attribute.hbm.xml" />
+		<mapping resource="com/igou/pojos/Size.hbm.xml" />
+		<mapping resource="com/igou/pojos/Color.hbm.xml" />
+		<mapping resource="com/igou/pojos/Brand.hbm.xml" />
+		<mapping resource="com/igou/pojos/ProductImages.hbm.xml" />
+		<mapping resource="com/igou/pojos/ProductType.hbm.xml" />
+		
+		<mapping resource="com/igou/app/pojos/FunctionButton.hbm.xml" />
+		<mapping resource="com/igou/app/pojos/ProductClassify.hbm.xml" />
+		<mapping resource="com/igou/app/pojos/Advert.hbm.xml"/>
+		
+		<mapping resource="com/igou/app/pojos/Cart.hbm.xml"/>
+		<mapping resource="com/igou/app/pojos/Order.hbm.xml"/>
+		<mapping resource="com/igou/app/pojos/Address.hbm.xml"/>
+		<mapping resource="com/igou/app/pojos/UserInfo.hbm.xml"/>
+
+
+
+	</session-factory>
+</hibernate-configuration>

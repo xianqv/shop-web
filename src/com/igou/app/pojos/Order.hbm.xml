@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.igou.app.pojos">
+	<class name="Order" table="orders">
+		<!-- 主键 -->
+		<id name="id" column="ID">
+			<generator class="assigned" />
+		</id>
+		<property name="size" column="size" type="string" not-null="true" />
+		<property name="color" column="color" type="string" not-null="true" />
+		<property name="num" column="num" type="int" not-null="true" />
+		<property name="totalPrice" column="totalPrice" type="double" not-null="true" />
+		<property name="isGet" column="isGet" type="int" not-null="true" />
+		<property name="proId" column="proId" type="int" not-null="true" />
+		<property name="isDeliver" column="isDeliver" type="int" not-null="true" />
+		<property name="isDeal" column="isDeal" type="int" not-null="true" />
+		<property name="userId" column="userId" type="int" not-null="true" />
+		<property name="userName" column="userName" type="string" not-null="true" />
+		<property name="phone" column="phone" type="string" not-null="true" />
+		<property name="address" column="address" type="string" not-null="true" />
+		<property name="proName" column="proName" type="string" not-null="true" />
+		<property name="msg" column="msg" type="string" not-null="true" />
+		
+		<property name="imgURL" column="imgURL" type="string" not-null="true" />
+		<property name="onePrice" column="onePrice" type="double" not-null="true" />
+	</class>
+</hibernate-mapping>

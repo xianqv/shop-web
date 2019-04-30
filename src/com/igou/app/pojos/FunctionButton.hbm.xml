@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.igou.app.pojos">
+	<class name="FunctionButton" table="functionbutton">
+		<!-- 主键 -->
+		<id name="id" column="ID">
+			<generator class="native" />
+		</id>
+		<!-- 品牌名 -->
+		<property name="name" column="name" type="string" not-null="true" />
+		<property name="jumpUrl" column="jumpUrl" type="string" not-null="true" />
+		<!-- 标题图片 -->
+		<property name="imageUrl" column="imageUrl" type="string"
+			not-null="true" />
+		<!-- 是否大牌 -->
+	</class>
+</hibernate-mapping>

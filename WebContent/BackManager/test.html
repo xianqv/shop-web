@@ -1,0 +1,108 @@
+<%@ page contentType="text/html; charset=utf-8"%>
+<%
+String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort() + path + "/";
+%>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<base href="<%=basePath%>">
+     <link href="<%=basePath%>css/default.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="<%=basePath%>js/swfupload/swfupload.js"></script>
+<script type="text/javascript" src="<%=basePath%>js/swfupload/handlers.js"></script>
+<script type="text/javascript" src="<%=basePath%>js/swfupload/fileprogress.js"></script>
+    <script type="text/javascript" src="<%=basePath%>js/swfupload/swfupload.queue.js"></script>
+<script type="text/javascript">
+   var swfu;
+   window.onload = function () {
+    var settings = {
+     // Backend Settings
+     file_post_name : "upload",
+     upload_url: "<%=basePath%>/admin/product/doMultipleUploadUsingList.action", // Relative to the SWF file
+     post_params: {"product1": "1"},        
+           use_query_string:false,
+     // File Upload Settings
+     file_size_limit : "100 MB",
+     file_types : "*.*",
+     file_types_description : "All Files",
+     file_upload_limit : 100,
+     file_queue_limit : 0,
+     custom_settings : {
+      progressTarget : "fsUploadProgress",
+      cancelButtonId : "btnCancel"
+     },
+     debug: false,
+     // The event handler functions are defined in handlers.js
+     file_queued_handler : fileQueued,
+     file_queue_error_handler : fileQueueError,
+     file_dialog_complete_handler : fileDialogComplete,
+     upload_start_handler : uploadStart,
+     upload_progress_handler : uploadProgress,
+     upload_error_handler : uploadError,
+     upload_success_handler : uploadSuccess,
+     upload_complete_handler : uploadComplete,
+     queue_complete_handler : queueComplete,
+     // Flash Settings
+     flash_url : "<%=basePath%>js/swfupload/swfupload.swf" // Relative to this file
+    
+    };
+    swfu = new SWFUpload(settings);
+   }
+    function uploadStart(file) {
+    document.getElementByIdx_x("back").innerHTML='';
+    var post_params = this.settings.post_params;
+    post_params.id = document.getElementByIdx_x("id").value;
+    this.setPostParams(post_params);
+    return true;
+    }           
+    <style type="text/css">
+    #content button,input,span{
+    margin: 5 5 5 5;
+    }
+    #back{
+    width:810;
+    height:500;
+    float:left;
+    text-align:center;
+    vertical-align:middle;
+    overflow:auto;
+    }
+    #img2{
+    float:left;
+    margin: 1 1 1 1;
+    text-align:center;
+    vertical-align:middle;
+    display: table-cell;
+    display: block;
+    font-size: 68px;
+    width:78;
+    height:78;
+    border: 1px solid #B10000;
+    }
+    #img2 img{
+    vertical-align:middle;
+    cursor: pointer;
+    }
+    #img2 img hover{
+    cursor: pointer;
+    }  
+</style>
+</head>
+   <div id="SWFUploadTarget" >
+<body>
+<div id="content">
+   <span>1、Product ID</span><input type="text" name="id" id="id" value= <%=request.getParameter("id") %> readonly>
+   <button id="btnBrowse" type="button" style="padding: 6px;" onClick="swfu.selectFiles(); this.blur();javascript:document.getElementByIdx_x('divStatus').innerHTML='';">
+   </div>
+</div>
+    <p>
+    <fieldset class="flash" id="fsUploadProgress">
+    <legend>Upload Progress</legend>
+    </fieldset>
+   <div id="divStatus"></div>
+    <div>
+     <input id="btnCancel" type="button" value="Cancel All Upload" onClick="swfu.cancelQueue();" disabled="disabled" style="font-size: 8pt;" />
+    </div>
+<div id="back"></div>
+</body>
+<html>

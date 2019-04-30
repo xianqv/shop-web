@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping  package="com.igou.pojos">
+	<class name="Attribute" table="attribute">
+		<!-- 主键 -->
+		 
+		<id name="id" column="ID">
+			<generator class="native" />
+		</id>
+		<!-- 材质  -->
+		<property name="material" column="material" type="string"/>
+			
+		<!--款式  -->
+		<property name="style" column="style" type="string"/>
+			
+		<!--适用对象  -->
+		<property name="userObject" column="userObject" type="string"/>
+			
+		<!--适用季节  -->
+		<property name="season" column="season" type="string"/>
+			
+		<!--描述  -->
+		<property name="describle" column="describle" type="string"/>
+			
+		<!-- CUP型号 -->
+		<property name="cupModel" column="cupModel" type="string"/>
+			
+		<!-- 屏幕尺寸 -->
+		<property name="screenSize" column="screenSize" type="string"/>
+			
+		<!-- 操作系统 -->
+		<property name="operatingSystem" column="operatingSystem" type="string"/>
+			
+		<!-- 内存说明 -->
+		<property name="memory" column="memory" type="string"/>
+			
+		<!-- 屏幕分辨率 -->
+		<property name="screenResolution" column="screenResolution" type="string"/>
+			
+		<!-- 附加说明 -->
+		<property name="additional" column="additional" type="string"/>
+		<!-- 与商品属性是一对多关系 1-1 -->	
+		
+	</class>
+</hibernate-mapping>
